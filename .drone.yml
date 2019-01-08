@@ -1,0 +1,91 @@
+pipeline:
+
+  init:
+    image: chrisns/docker-terragrunt
+    pull: true
+    commands:
+      - export TF_VAR_APPS_ID=$${AWS_ACCESS_KEY_ID}
+      - export TF_VAR_APPS_KEY=$${AWS_SECRET_ACCESS_KEY}
+      - terragrunt init
+    when:
+      branch:
+        exclude: [ master ]
+    secrets:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - TEST_ACC_KEY_ID
+      - TEST_ACC_SECRET_KEY
+
+
+  testsuite:
+    image: docker:18.05
+    environment:
+      - DOCKER_HOST=tcp://172.17.0.1:2375
+    commands:
+      - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check
+    when:
+      branch:
+        exclude: [ master ]
+    secrets:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - TEST_ACC_KEY_ID
+      - TEST_ACC_SECRET_KEY
+
+  validate:
+    image: chrisns/docker-terragrunt
+    commands:
+      - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+      - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+      - export CI_ID=$${TF_VAR_CI_ID}
+      - export CI_KEY=$${TF_VAR_CI_KEY}
+      - terragrunt validate
+    when:
+      branch:
+        exclude: [ master ]
+    secrets:
+      - TF_VAR_CI_ID
+      - TF_VAR_CI_KEY
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - TEST_ACC_KEY_ID
+      - TEST_ACC_SECRET_KEY
+
+  plan-test:
+    image: chrisns/docker-terragrunt
+    pull: true
+    commands:
+      - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+      - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+      - export CI_ID=$${TF_VAR_CI_ID}
+      - export CI_KEY=$${TF_VAR_CI_KEY}
+      - terragrunt plan -lock=false -out=plan
+    when:
+      event: push
+    secrets:
+      - TF_VAR_CI_ID
+      - TF_VAR_CI_KEY
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - TEST_ACC_KEY_ID
+      - TEST_ACC_SECRET_KEY
+
+  apply-test:
+    image: chrisns/docker-terragrunt
+    pull: true
+    commands:
+      - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+      - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+      - export CI_ID=$${TF_VAR_CI_ID}
+      - export CI_KEY=$${TF_VAR_CI_KEY}
+      - terragrunt apply -auto-approve -parallelism=50 plan
+    when:
+      branch: master
+      event: push
+    secrets:
+      - TF_VAR_CI_ID
+      - TF_VAR_CI_KEY
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - TEST_ACC_ID
+      - TEST_ACC_KEY
