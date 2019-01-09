@@ -34,10 +34,10 @@ module "apps" {
   #  ops_cidr     = "${module.ops.opsvpc_cidr_block}"
   #}
 
-  ad_sg_cidr_ingress = [
-    "${module.peering.peeringvpc_cidr_block}",
-    "${module.ops.opsvpc_cidr_block}",
-    "${module.ad.cidr_block}",
-    "10.1.0.0/16",
-  ]
+  #ad_sg_cidr_ingress = [
+  #  "${module.peering.peeringvpc_cidr_block}",
+  #  "${module.ops.opsvpc_cidr_block}",
+  #  "${module.ad.cidr_block}",
+  #  "10.1.0.0/16",
+  #]
 }
