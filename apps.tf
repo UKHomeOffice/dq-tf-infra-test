@@ -17,6 +17,7 @@ module "apps" {
 
   s3_bucket_name = {
     archive_log = "s3-dq-log-archive-bucket-${var.NAMESPACE}"
+    oag_archive = "dq-oag-archive-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
