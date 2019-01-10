@@ -16,11 +16,11 @@ module "apps" {
   naming_suffix                   = "${local.naming_suffix}"
 
   s3_bucket_name = {
-    oag_archive  = "dq-oag-archive-${var.NAMESPACE}"
+    archive_log = "s3-dq-log-archive-bucket-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
-    #archive_log  = "log-delivery-write"
+    archive_log  = "log-delivery-write"
     oag_archive = "private"
   }
 
