@@ -71,10 +71,10 @@ module "apps" {
   #  peering_to_ops     = "${aws_vpc_peering_connection.apps_to_ops.id}"
   #}
 
-  #route_table_cidr_blocks = {
-  #  peering_cidr = "${module.peering.peeringvpc_cidr_block}"
-  #  ops_cidr     = "${module.ops.opsvpc_cidr_block}"
-  #}
+  route_table_cidr_blocks = {
+    peering_cidr = "${module.peering.peeringvpc_cidr_block}"
+    #ops_cidr     = "${module.ops.opsvpc_cidr_block}"
+  }
 
   #ad_sg_cidr_ingress = [
   #  "${module.peering.peeringvpc_cidr_block}",
