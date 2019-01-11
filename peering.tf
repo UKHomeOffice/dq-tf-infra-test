@@ -16,7 +16,7 @@ module "peering" {
   naming_suffix             = "${local.naming_suffix}"
 
   route_table_cidr_blocks = {
-    #ops_cidr  = "${module.ops.opsvpc_cidr_block}"
+    ops_cidr  = "${module.ops.opsvpc_cidr_block}"
     apps_cidr = "${module.apps.appsvpc_cidr_block}"
     #acp_prod  = "${data.aws_vpc_peering_connection.peering_to_acp.cidr_block}"
   }

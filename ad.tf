@@ -5,17 +5,17 @@ module "ad" {
 
   source = "github.com/ukhomeoffice/dq-tf-ad"
 
-  #peer_with = [
-    #"${module.ops.opsvpc_id}",
-    #"${module.apps.appsvpc_id}",
-  #]
+  peer_with = [
+    "${module.ops.opsvpc_id}",
+    "${module.apps.appsvpc_id}",
+  ]
 
   cidr_block                      = "10.99.0.0/16"
   allow_remote_vpc_dns_resolution = false
   peer_count                      = 2
 
   subnets = [
-    #"${module.ops.ad_subnet_id}",
+    "${module.ops.ad_subnet_id}",
     "${module.apps.ad_subnet_id}",
   ]
 
