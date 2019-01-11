@@ -66,19 +66,19 @@ module "apps" {
     carrier_portal_working     = "private"
   }
 
-  #vpc_peering_connection_ids = {
-  #  peering_to_peering = "${aws_vpc_peering_connection.peering_to_apps.id}"
-  #  peering_to_ops     = "${aws_vpc_peering_connection.apps_to_ops.id}"
-  #}
+  vpc_peering_connection_ids = {
+    peering_to_peering = "${aws_vpc_peering_connection.peering_to_apps.id}"
+    peering_to_ops     = "${aws_vpc_peering_connection.apps_to_ops.id}"
+  }
 
   route_table_cidr_blocks = {
     peering_cidr = "${module.peering.peeringvpc_cidr_block}"
-    #ops_cidr     = "${module.ops.opsvpc_cidr_block}"
+    ops_cidr     = "${module.ops.opsvpc_cidr_block}"
   }
 
   ad_sg_cidr_ingress = [
     "${module.peering.peeringvpc_cidr_block}",
-  #  "${module.ops.opsvpc_cidr_block}",
+    "${module.ops.opsvpc_cidr_block}",
     "${module.ad.cidr_block}",
     "10.1.0.0/16",
   ]

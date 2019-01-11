@@ -23,7 +23,7 @@ module "peering" {
 
   vpc_peering_connection_ids = {
     peering_and_apps    = "${aws_vpc_peering_connection.peering_to_apps.id}"
-    #peering_and_ops     = "${aws_vpc_peering_connection.peering_to_ops.id}"
+    peering_and_ops     = "${aws_vpc_peering_connection.peering_to_ops.id}"
     #peering_and_acpprod = "${data.aws_vpc_peering_connection.peering_to_acp.id}"
   }
 
