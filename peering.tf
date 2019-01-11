@@ -1,5 +1,5 @@
 module "peering" {
-  source = "github.com/ukhomeoffice/dq-tf-peering"
+  source = "github.com/ukhomeoffice/dq-tf-peering-test"
 
   providers = {
     aws = "aws.APPS"
