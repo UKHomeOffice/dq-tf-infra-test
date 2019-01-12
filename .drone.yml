@@ -78,7 +78,7 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
-      - terragrunt apply -auto-approve -parallelism=50 plan
+      - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
     when:
       branch: master
       event: push
