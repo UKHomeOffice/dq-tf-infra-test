@@ -59,7 +59,7 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
-      - terragrunt plan -lock=false -out=plan
+      - terragrunt plan -out=plan
     when:
       event: push
     secrets:
