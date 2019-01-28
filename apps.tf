@@ -20,7 +20,6 @@ module "apps" {
     archive_data               = "s3-dq-data-archive-bucket-${var.NAMESPACE}"
     working_data               = "s3-dq-data-working-bucket-${var.NAMESPACE}"
     landing_data               = "s3-dq-data-landing-bucket-${var.NAMESPACE}"
-    archive_log                = "s3-dq-log-archive-bucket-${var.NAMESPACE}"
     oag_archive                = "dq-oag-archive-${var.NAMESPACE}"
     acl_archive                = "dq-acl-archive-${var.NAMESPACE}"
     reference_data             = "dq-reference-data-${var.NAMESPACE}"
