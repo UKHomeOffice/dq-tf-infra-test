@@ -59,6 +59,10 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
+      - ls -all
+      - pwd
+      - whoami
+      - ls ~/.ssh/
       - terragrunt plan -out=plan
     when:
       event: push
