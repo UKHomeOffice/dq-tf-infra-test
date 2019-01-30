@@ -59,8 +59,8 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
-      - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - terragrunt plan -out=plan
     when:
       event: push
