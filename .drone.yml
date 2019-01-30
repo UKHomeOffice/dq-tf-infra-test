@@ -71,6 +71,8 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
+      - source: gitlab_ssh_private_key
+        target: ssh_key
 
   apply-test:
     image: chrisns/docker-terragrunt
