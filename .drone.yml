@@ -62,7 +62,7 @@ pipeline:
       - ls -all
       - pwd
       - whoami
-      - ls ~/.ssh/
+      - ssh
       - terragrunt plan -out=plan
     when:
       event: push
