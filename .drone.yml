@@ -17,6 +17,7 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
+      - SSH_KEY 
 
 
   testsuite:
@@ -35,6 +36,7 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
+      - SSH_KEY 
 
   validate:
     image: chrisns/docker-terragrunt
@@ -56,6 +58,7 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
+      - SSH_KEY 
 
   plan-test:
     image: chrisns/docker-terragrunt
