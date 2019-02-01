@@ -9,3 +9,7 @@ variable "APPS_KEY" {}
 variable "NAMESPACE" {
   default = "test"
 }
+
+variable "pipeline_count" {
+  default = "1"
+}
