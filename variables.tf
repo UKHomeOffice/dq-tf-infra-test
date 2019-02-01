@@ -11,5 +11,5 @@ variable "NAMESPACE" {
 }
 
 variable "pipeline_count" {
-  default = "1"
+  default = "0"
 }
