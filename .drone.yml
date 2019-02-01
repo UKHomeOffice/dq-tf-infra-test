@@ -26,7 +26,6 @@ pipeline:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
       - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
-      - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check
     when:
       branch:
