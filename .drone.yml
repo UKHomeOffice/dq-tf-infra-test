@@ -4,6 +4,8 @@ pipeline:
     image: chrisns/docker-terragrunt
     pull: true
     commands:
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - export TF_VAR_APPS_ID=$${AWS_ACCESS_KEY_ID}
       - export TF_VAR_APPS_KEY=$${AWS_SECRET_ACCESS_KEY}
       - terragrunt init
@@ -22,6 +24,8 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check
     when:
       branch:
@@ -39,6 +43,8 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - terragrunt validate
     when:
       branch:
