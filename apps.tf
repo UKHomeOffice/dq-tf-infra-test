@@ -1,5 +1,5 @@
 module "apps" {
-  source = "github.com/UKHomeOffice/dq-tf-apps-test?ref=feature-perms"
+  source = "github.com/UKHomeOffice/dq-tf-apps-test"
 
   providers = {
     aws = "aws.APPS"
