@@ -42,6 +42,7 @@ module "apps" {
     airports_working           = "s3-dq-airports-working-${var.NAMESPACE}"
     reporting_internal_working = "s3-dq-reporting-internal-working-${var.NAMESPACE}"
     carrier_portal_working     = "s3-dq-carrier-portal-working-${var.NAMESPACE}"
+    gait_internal              = "s3-dq-gait-internal-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -70,6 +71,7 @@ module "apps" {
     airports_working           = "private"
     reporting_internal_working = "private"
     carrier_portal_working     = "private"
+    gait_internal              = "private"
   }
 
   vpc_peering_connection_ids = {
