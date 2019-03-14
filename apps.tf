@@ -44,6 +44,7 @@ module "apps" {
     carrier_portal_working     = "s3-dq-carrier-portal-working-${var.NAMESPACE}"
     gait_internal              = "s3-dq-gait-internal-${var.NAMESPACE}"
     mds_extract                = "s3-dq-mds-extract-${var.NAMESPACE}"
+    athena_log                 = "s3-dq-athena-log-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -74,6 +75,7 @@ module "apps" {
     carrier_portal_working     = "private"
     gait_internal              = "private"
     mds_extract                = "private"
+    athena_log                 = "private"
   }
 
   vpc_peering_connection_ids = {
