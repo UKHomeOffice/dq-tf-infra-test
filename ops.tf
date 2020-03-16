@@ -22,6 +22,7 @@ module "ops" {
   log_archive_s3_bucket           = "${module.apps.log_archive_bucket_id}"
   s3_bucket_name                  = "s3-dq-httpd-config-bucket-${var.NAMESPACE}"
 # is this required
+# need to identify vpc peers
   vpc_peering_connection_ids = {
     ops_and_apps    = "${aws_vpc_peering_connection.apps_to_ops.id}"
     ops_and_peering = "${aws_vpc_peering_connection.peering_to_ops.id}"
