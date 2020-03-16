@@ -3,7 +3,7 @@ This is being used for the build environment for KPI-Accuracy
 
 - changes
 
-* Updated the Webhooks via Admin Panel in https://github.com/UKHomeOffice/dq-tf-infra-test
+Updated the Webhooks via Admin Panel in https://github.com/UKHomeOffice/dq-tf-infra-test
 
 TO-DO
 
