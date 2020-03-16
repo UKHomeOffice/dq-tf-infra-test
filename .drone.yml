@@ -10,8 +10,9 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${AWS_SECRET_ACCESS_KEY}
       - terragrunt init
     when:
-      branch:
-        exclude: [ master ]
+      event: push
+      #branch:
+        #exclude: [ master ]
     secrets:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
@@ -28,8 +29,10 @@ pipeline:
       - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
       - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check
     when:
-      branch:
-        exclude: [ master ]
+      event: push
+      #branch:
+        #exclude: [ master ]
+        event: push
     secrets:
       - AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY
@@ -48,8 +51,9 @@ pipeline:
       - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - terragrunt validate
     when:
-      branch:
-        exclude: [ master ]
+      event: push
+      #branch:
+       # exclude: [ master ]
     secrets:
       - TF_VAR_CI_ID
       - TF_VAR_CI_KEY
@@ -91,7 +95,7 @@ pipeline:
       - export CI_KEY=$${TF_VAR_CI_KEY}
       - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
     when:
-      branch: master
+      #branch: master
       event: push
     secrets:
       - TF_VAR_CI_ID
