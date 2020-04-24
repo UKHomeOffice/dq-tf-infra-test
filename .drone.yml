@@ -4,7 +4,7 @@ pipeline:
     image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
     pull: true
     commands:
-      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
       - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - export TF_VAR_APPS_ID=$${AWS_ACCESS_KEY_ID}
       - export TF_VAR_APPS_KEY=$${AWS_SECRET_ACCESS_KEY}
@@ -18,7 +18,7 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
-      - SSH_KEY 
+      - SSH_KEY
 
 
   testsuite:
@@ -26,7 +26,7 @@ pipeline:
     environment:
       - DOCKER_HOST=tcp://172.17.0.1:2375
     commands:
-      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
       - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check
     when:
       event: push
@@ -38,7 +38,7 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
-      - SSH_KEY 
+      - SSH_KEY
 
   validate:
     image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
@@ -47,7 +47,7 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
-      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
       - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - terragrunt validate
     when:
@@ -61,7 +61,7 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
-      - SSH_KEY 
+      - SSH_KEY
 
   plan-test:
     image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
@@ -71,7 +71,7 @@ pipeline:
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
       - export CI_ID=$${TF_VAR_CI_ID}
       - export CI_KEY=$${TF_VAR_CI_KEY}
-      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa 
+      - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
       - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
       - terragrunt plan -out=plan
     when:
@@ -83,24 +83,24 @@ pipeline:
       - AWS_SECRET_ACCESS_KEY
       - TEST_ACC_KEY_ID
       - TEST_ACC_SECRET_KEY
-      - SSH_KEY 
+      - SSH_KEY
 
-  apply-test:
-    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
-    pull: true
-    commands:
-      - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
-      - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
-      - export CI_ID=$${TF_VAR_CI_ID}
-      - export CI_KEY=$${TF_VAR_CI_KEY}
-      - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
-    when:
-      #branch: master
-      event: push
-    secrets:
-      - TF_VAR_CI_ID
-      - TF_VAR_CI_KEY
-      - AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY
-      - TEST_ACC_ID
-      - TEST_ACC_KEY
+  # apply-test:
+  #   image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
+  #   pull: true
+  #   commands:
+  #     - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+  #     - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+  #     - export CI_ID=$${TF_VAR_CI_ID}
+  #     - export CI_KEY=$${TF_VAR_CI_KEY}
+  #     - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
+  #   when:
+  #     #branch: master
+  #     event: push
+  #   secrets:
+  #     - TF_VAR_CI_ID
+  #     - TF_VAR_CI_KEY
+  #     - AWS_ACCESS_KEY_ID
+  #     - AWS_SECRET_ACCESS_KEY
+  #     - TEST_ACC_ID
+  #     - TEST_ACC_KEY
