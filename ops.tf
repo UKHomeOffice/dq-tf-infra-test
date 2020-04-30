@@ -54,6 +54,5 @@ module "ops" {
     "${module.peering.peeringvpc_cidr_block}",
     "${module.apps.appsvpc_cidr_block}",
     "${module.ad.cidr_block}",
-    "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16",
   ]
 }
