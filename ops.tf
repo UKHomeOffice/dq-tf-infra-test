@@ -28,14 +28,14 @@ module "ops" {
   # s3_bucket_name                  = "s3-dq-httpd-config-bucket-${var.NAMESPACE}"
   # ops_config_bucket               = "s3-dq-ops-config-${var.NAMESPACE}"
   # athena_maintenance_bucket       = "s3-dq-athena-maintenance-bucket-${var.NAMESPACE}"
-  # athena_log_bucket               = "${module.apps.athena_log_bucket}"
-  # aws_bucket_key = "${module.apps.aws_bucket_key}"
+  athena_log_bucket = "${module.apps.athena_log_bucket}"
+  aws_bucket_key    = "${module.apps.aws_bucket_key}"
   # dq_pipeline_ops_readwrite_database_name_list = "${module.apps.dq_pipeline_ops_readwrite_database_name_list}"
   # dq_pipeline_ops_readonly_database_name_list  = "${module.apps.dq_pipeline_ops_readonly_database_name_list}"
   # dq_pipeline_ops_readwrite_bucket_list        = "${module.apps.dq_pipeline_ops_readwrite_bucket_list}"
   # dq_pipeline_ops_readonly_bucket_list         = "${module.apps.dq_pipeline_ops_readonly_bucket_list}"
-  # apps_aws_bucket_key = "${module.apps.aws_bucket_key}"
-  namespace = "${var.NAMESPACE}"
+  apps_aws_bucket_key = "${module.apps.aws_bucket_key}"
+  namespace           = "${var.NAMESPACE}"
 
 
   vpc_peering_connection_ids = {
