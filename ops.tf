@@ -50,9 +50,10 @@ module "ops" {
     # acp_vpn      = "${data.aws_vpc_peering_connection.ops_to_acpvpn.cidr_block}"
   }
 
-  ad_sg_cidr_ingress = [
-    "${module.peering.peeringvpc_cidr_block}",
-    "${module.apps.appsvpc_cidr_block}",
-    "${module.ad.cidr_block}",
-  ]
-}
+#   ad_sg_cidr_ingress = [
+#     "${module.peering.peeringvpc_cidr_block}",
+#     "${module.apps.appsvpc_cidr_block}",
+#     "${module.ad.cidr_block}",
+#     "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16",
+#   ]
+# }
