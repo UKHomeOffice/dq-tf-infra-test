@@ -5,11 +5,11 @@ module "apps" {
     aws = "aws.APPS"
   }
 
-  cidr_block               = "10.1.0.0/16"
-  public_subnet_cidr_block = "10.1.0.0/24"
-  ad_subnet_cidr_block     = "10.1.16.0/24"
-  # haproxy_private_ip              = "${module.peering.haproxy_private_ip}"
-  # haproxy_private_ip2             = "${module.peering.haproxy_private_ip2}"
+  cidr_block                      = "10.1.0.0/16"
+  public_subnet_cidr_block        = "10.1.0.0/24"
+  ad_subnet_cidr_block            = "10.1.16.0/24"
+  haproxy_private_ip              = "${module.peering.haproxy_private_ip}"
+  haproxy_private_ip2             = "${module.peering.haproxy_private_ip2}"
   az                              = "eu-west-2a"
   az2                             = "eu-west-2b"
   adminpassword                   = "${data.aws_kms_secrets.ad_admin_password.plaintext["ad_admin_password"]}"
