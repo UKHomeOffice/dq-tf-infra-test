@@ -13,7 +13,7 @@ module "ops" {
   # tableau_subnet_cidr_block                    = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.6.0/24"
   az = "eu-west-2a"
   # bastion_linux_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.11"
-  bastion_windows_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.12"
+  bastion_windows_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.2.12"
   # bastion2_windows_ip                          = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.13"
   # bastion3_windows_ip                          = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.14"
   # bastion4_windows_ip                          = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.15"
