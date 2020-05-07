@@ -3,8 +3,8 @@ terraform {
 }
 
 locals {
-  naming_suffix  = "${var.NAMESPACE}-dq"
-  #iam_role_count = "${length(module.apps.iam_roles)}"
+  naming_suffix = "${var.NAMESPACE}-dq"
+  # iam_role_count = "${length(module.apps.iam_roles)}"
 }
 
 provider "aws" {
