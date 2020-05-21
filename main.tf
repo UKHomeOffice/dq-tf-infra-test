@@ -1,5 +1,6 @@
 terraform {
-  backend "s3" {}
+  backend "s3" {
+  }
 }
 
 locals {
@@ -14,13 +15,14 @@ provider "aws" {
 provider "aws" {
   alias      = "CI"
   region     = "eu-west-2"
-  access_key = "${var.CI_ID}"
-  secret_key = "${var.CI_KEY}"
+  access_key = var.CI_ID
+  secret_key = var.CI_KEY
 }
 
 provider "aws" {
   alias      = "APPS"
   region     = "eu-west-2"
-  access_key = "${var.APPS_ID}"
-  secret_key = "${var.APPS_KEY}"
+  access_key = var.APPS_ID
+  secret_key = var.APPS_KEY
 }
+
