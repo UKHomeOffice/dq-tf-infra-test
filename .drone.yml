@@ -86,7 +86,7 @@ pipeline:
       - SSH_KEY
 
   apply-test:
-    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
+    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
     pull: true
     commands:
       - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
