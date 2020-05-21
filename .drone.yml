@@ -85,22 +85,22 @@ pipeline:
       - TEST_ACC_SECRET_KEY
       - SSH_KEY
 
-  # apply-test:
-  #   image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
-  #   pull: true
-  #   commands:
-  #     - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
-  #     - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
-  #     - export CI_ID=$${TF_VAR_CI_ID}
-  #     - export CI_KEY=$${TF_VAR_CI_KEY}
-  #     - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
-  #   when:
-  #     #branch: master
-  #     event: push
-  #   secrets:
-  #     - TF_VAR_CI_ID
-  #     - TF_VAR_CI_KEY
-  #     - AWS_ACCESS_KEY_ID
-  #     - AWS_SECRET_ACCESS_KEY
-  #     - TEST_ACC_ID
-  #     - TEST_ACC_KEY
+  apply-test:
+    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:11
+    pull: true
+    commands:
+      - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+      - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+      - export CI_ID=$${TF_VAR_CI_ID}
+      - export CI_KEY=$${TF_VAR_CI_KEY}
+      - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
+    when:
+      #branch: master
+      event: push
+    secrets:
+      - TF_VAR_CI_ID
+      - TF_VAR_CI_KEY
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - TEST_ACC_ID
+      - TEST_ACC_KEY
