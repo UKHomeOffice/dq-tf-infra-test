@@ -1,5 +1,5 @@
 module "ops" {
-  source =   "git::https://github.com/ukhomeoffice/dq-tf-ops-test.git?ref=TF12-upgrade"
+  source =   "github.com/ukhomeoffice/dq-tf-ops-test"
 
 
   providers = {

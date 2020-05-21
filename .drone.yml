@@ -95,7 +95,7 @@ pipeline:
       - export CI_KEY=$${TF_VAR_CI_KEY}
       - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
     when:
-      #branch: master
+      branch: master
       event: push
     secrets:
       - TF_VAR_CI_ID

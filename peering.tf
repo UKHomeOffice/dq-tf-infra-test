@@ -1,5 +1,5 @@
 module "peering" {
-  source = "git::https://github.com/ukhomeoffice/dq-tf-peering-test.git?ref=TF12-upgrade"
+  source = "github.com/ukhomeoffice/dq-tf-peering-test"
 
 
   providers = {
