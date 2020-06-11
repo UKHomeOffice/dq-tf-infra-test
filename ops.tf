@@ -55,10 +55,10 @@ module "ops" {
     apps_cidr    = module.apps.appsvpc_cidr_block
   }
 
-  ad_sg_cidr_ingress = [
-    module.peering.peeringvpc_cidr_block,
-    module.apps.appsvpc_cidr_block,
-    module.ad.cidr_block,
-    "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16",
-  ]
+  # ad_sg_cidr_ingress = [
+  #   module.peering.peeringvpc_cidr_block,
+  #   module.apps.appsvpc_cidr_block,
+  #   module.ad.cidr_block,
+  #   "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16",
+  # ]
 }
