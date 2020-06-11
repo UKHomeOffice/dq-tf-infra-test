@@ -4,17 +4,10 @@ module "ops" {
 
   providers = {
     aws = aws.APPS
-    # ops_and_acpvpn  = "${data.aws_vpc_peering_connection.ops_to_acpvpn.id}"
-
-    # acp_vpn      = "${data.aws_vpc_peering_connection.ops_to_acpvpn.cidr_block}"
-
-    ad_sg_cidr_ingress = [
-      "${module.peering.peeringvpc_cidr_block}",
-      "${module.apps.appsvpc_cidr_block}",
-      "${module.ad.cidr_block}",
-      "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16",
-    ]
   }
+  # ops_and_acpvpn  = "${data.aws_vpc_peering_connection.ops_to_acpvpn.id}"
+
+  # acp_vpn      = "${data.aws_vpc_peering_connection.ops_to_acpvpn.cidr_block}"
 
   naming_suffix            = local.naming_suffix
   cidr_block               = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16"
@@ -61,4 +54,11 @@ module "ops" {
     peering_cidr = module.peering.peeringvpc_cidr_block
     apps_cidr    = module.apps.appsvpc_cidr_block
   }
+
+  ad_sg_cidr_ingress = [
+    module.peering.peeringvpc_cidr_block,
+    module.apps.appsvpc_cidr_block,
+    module.ad.cidr_block,
+    "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.0/16",
+  ]
 }
