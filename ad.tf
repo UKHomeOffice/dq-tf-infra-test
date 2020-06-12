@@ -3,7 +3,7 @@ module "ad" {
     aws = aws.APPS
   }
 
-  source = "github.com/ukhomeoffice/dq-tf-ad"
+  source = "github.com/ukhomeoffice/dq-tf-ad-test"
 
   peer_with = [
     module.ops.opsvpc_id,
