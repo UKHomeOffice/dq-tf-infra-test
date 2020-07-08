@@ -61,6 +61,7 @@ module "apps" {
     api_arrivals               = "s3-dq-api-arrivals-${var.NAMESPACE}"
     accuracy_score             = "s3-dq-accuracy-score-${var.NAMESPACE}"
     api_cdlz_msk               = "s3-dq-api-cdlz-msk-${var.NAMESPACE}"
+    cdl_s3_s4                  = "s3-dq-cdl-s3-s4-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -102,6 +103,7 @@ module "apps" {
     api_arrivals               = "private"
     accuracy_score             = "private"
     api_cdlz_msk               = "private"
+    cdl_s3_s4                  = "private"
   }
 
   vpc_peering_connection_ids = {
