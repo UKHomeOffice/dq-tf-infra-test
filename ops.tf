@@ -19,6 +19,7 @@ module "ops" {
   az = "eu-west-2a"
 
   # bastion_linux_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.11"
+  trivy_server_ip    = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.13"
   bastion_windows_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.2.12"
 
   # bastion2_windows_ip                          = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.13"
