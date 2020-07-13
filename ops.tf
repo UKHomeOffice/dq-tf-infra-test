@@ -20,6 +20,7 @@ module "ops" {
 
   # bastion_linux_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.11"
   bastion_windows_ip = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.2.12"
+  trivy_server_ip    = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.2.13"
 
   # bastion2_windows_ip                          = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.13"
   # bastion3_windows_ip                          = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.0.14"
