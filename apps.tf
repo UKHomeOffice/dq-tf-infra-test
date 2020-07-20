@@ -62,7 +62,7 @@ module "apps" {
     accuracy_score             = "s3-dq-accuracy-score-${var.NAMESPACE}"
     api_cdlz_msk               = "s3-dq-api-cdlz-msk-${var.NAMESPACE}"
     cdl_s3_s4                  = "s3-dq-cdl-s3-s4-${var.NAMESPACE}"
-    cdl_s3_s4_parsed           = "s3-dq-cdl-s3-s4-parsed${var.NAMESPACE}"
+    cdl_s3_s4_parsed           = "s3-dq-cdl-s3-s4-parsed-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
