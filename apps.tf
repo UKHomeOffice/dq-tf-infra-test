@@ -63,7 +63,7 @@ module "apps" {
     api_cdlz_msk               = "s3-dq-api-cdlz-msk-${var.NAMESPACE}"
     cdl_s3_s4                  = "s3-dq-cdl-s3-s4-${var.NAMESPACE}"
     cdl_s3_s4_parsed           = "s3-dq-cdl-s3-s4-parsed-${var.NAMESPACE}"
-    api-rls-xrs-reconciliation = "s3-api-rls-xrs-reconciliation-${var.NAMESPACE}"
+    api-rls-xrs-reconciliation = "s3-dq-rls-xrs-reconciliation-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
