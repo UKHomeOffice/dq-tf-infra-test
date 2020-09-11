@@ -27,9 +27,9 @@ module "ops" {
   # analysis_instance_ip                         = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.2.8"
   # tableau_dev_ip                               = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.6.10"
   # tableau_deployment_ip                        = "${var.NAMESPACE == "prod" ? "10.2" : "10.8"}.6.11"
-  ad_aws_ssm_document_name        = module.ad.ad_aws_ssm_document_name
-  ad_writer_instance_profile_name = module.ad.ad_writer_instance_profile_name
-  adminpassword                   = data.aws_kms_secrets.ad_admin_password.plaintext["ad_admin_password"]
+  # ad_aws_ssm_document_name        = module.ad.ad_aws_ssm_document_name
+  # ad_writer_instance_profile_name = module.ad.ad_writer_instance_profile_name
+  # adminpassword                   = data.aws_kms_secrets.ad_admin_password.plaintext["ad_admin_password"]
   log_archive_s3_bucket           = module.apps.log_archive_bucket_id
   s3_bucket_name                  = "s3-dq-httpd-config-bucket-${var.NAMESPACE}"
   ops_config_bucket               = "s3-dq-ops-config-${var.NAMESPACE}"
