@@ -64,6 +64,8 @@ module "apps" {
     cdl_s3_s4                  = "s3-dq-cdl-s3-s4-${var.NAMESPACE}"
     cdl_s3_s4_parsed           = "s3-dq-cdl-s3-s4-parsed-${var.NAMESPACE}"
     api-rls-xrs-reconciliation = "s3-dq-rls-xrs-reconciliation-${var.NAMESPACE}"
+    dq_fs_archive              = "s3-dq-fs-archive-${var.NAMESPACE}"
+    dq_fs_internal             = "s3-dq-fs-internal-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -108,6 +110,8 @@ module "apps" {
     cdl_s3_s4                  = "private"
     cdl_s3_s4_parsed           = "private"
     api-rls-xrs-reconciliation = "private"
+    dq_fs_archive              = "private"
+    dq_fs_internal             = "private"
   }
 
   vpc_peering_connection_ids = {
