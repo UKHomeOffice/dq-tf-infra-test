@@ -66,6 +66,8 @@ module "apps" {
     api-rls-xrs-reconciliation = "s3-dq-rls-xrs-reconciliation-${var.NAMESPACE}"
     dq_fs_archive              = "s3-dq-fs-archive-${var.NAMESPACE}"
     dq_fs_internal             = "s3-dq-fs-internal-${var.NAMESPACE}"
+    dq_rm_archive              = "s3-dq-rm-archive-${var.NAMESPACE}"
+    dq_rm_internal             = "s3-dq-rm-internal-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -112,6 +114,8 @@ module "apps" {
     api-rls-xrs-reconciliation = "private"
     dq_fs_archive              = "private"
     dq_fs_internal             = "private"
+    dq_rm_archive              = "private"
+    dq_rm_internal             = "private"
   }
 
   vpc_peering_connection_ids = {

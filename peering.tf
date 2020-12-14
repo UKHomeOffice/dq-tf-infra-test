@@ -19,6 +19,7 @@ module "peering" {
   log_archive_s3_bucket     = module.apps.log_archive_bucket_id
   az                        = "eu-west-2a"
   naming_suffix             = local.naming_suffix
+  namespace                 = var.NAMESPACE
 
   route_table_cidr_blocks = {
     ops_cidr  = module.ops.opsvpc_cidr_block
