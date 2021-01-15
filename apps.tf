@@ -68,6 +68,7 @@ module "apps" {
     dq_fs_internal             = "s3-dq-fs-internal-${var.NAMESPACE}"
     dq_rm_archive              = "s3-dq-rm-archive-${var.NAMESPACE}"
     dq_rm_internal             = "s3-dq-rm-internal-${var.NAMESPACE}"
+    dq_aws_config              = "s3-dq-aws-config-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -116,6 +117,7 @@ module "apps" {
     dq_fs_internal             = "private"
     dq_rm_archive              = "private"
     dq_rm_internal             = "private"
+    dq_aws_config              = "private"
   }
 
   vpc_peering_connection_ids = {
