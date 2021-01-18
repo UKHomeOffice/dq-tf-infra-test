@@ -69,6 +69,10 @@ module "apps" {
     dq_rm_archive              = "s3-dq-rm-archive-${var.NAMESPACE}"
     dq_rm_internal             = "s3-dq-rm-internal-${var.NAMESPACE}"
     dq_aws_config              = "s3-dq-aws-config-${var.NAMESPACE}"
+    dq_asn_archive             = "s3-dq-asn-archive-${var.NAMESPACE}"
+    dq_asn_internal            = "s3-dq-asn-internal-${var.NAMESPACE}"
+    dq_snsgb_archive           = "s3-dq-snsgb-archive-${var.NAMESPACE}"
+    dq_snsgb_internal          = "s3-dq-snsgb-internal-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -118,6 +122,10 @@ module "apps" {
     dq_rm_archive              = "private"
     dq_rm_internal             = "private"
     dq_aws_config              = "private"
+    dq_asn_archive             = "private"
+    dq_asn_internal            = "private"
+    dq_snsgb_archive           = "private"
+    dq_snsgb_internal          = "private"
   }
 
   vpc_peering_connection_ids = {
