@@ -73,6 +73,8 @@ module "apps" {
     dq_asn_internal            = "s3-dq-asn-internal-${var.NAMESPACE}"
     dq_snsgb_archive           = "s3-dq-snsgb-archive-${var.NAMESPACE}"
     dq_snsgb_internal          = "s3-dq-snsgb-internal-${var.NAMESPACE}"
+    dq_asn_marine_archive      = "s3-dq-asn-marine-archive-${var.NAMESPACE}"
+    dq_asn_marine_internal     = "s3-dq-asn-marine-internal-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -126,6 +128,8 @@ module "apps" {
     dq_asn_internal            = "private"
     dq_snsgb_archive           = "private"
     dq_snsgb_internal          = "private"
+    dq_asn_marine_archive      = "private"
+    dq_asn_marine_internal     = "private"
   }
 
   vpc_peering_connection_ids = {
