@@ -1,0 +1,145 @@
+---
+kind: pipeline
+name: default
+type: kubernetes
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: init
+  pull: always
+  image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+  commands:
+  - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+  - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
+  - export TF_VAR_APPS_ID=$${AWS_ACCESS_KEY_ID}
+  - export TF_VAR_APPS_KEY=$${AWS_SECRET_ACCESS_KEY}
+  - terragrunt init
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    SSH_KEY:
+      from_secret: SSH_KEY
+    TEST_ACC_KEY_ID:
+      from_secret: TEST_ACC_KEY_ID
+    TEST_ACC_SECRET_KEY:
+      from_secret: TEST_ACC_SECRET_KEY
+  when:
+    event:
+    - push
+
+- name: testsuite
+  pull: if-not-exists
+  image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+  commands:
+  - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+  - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check && echo $?
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    SSH_KEY:
+      from_secret: SSH_KEY
+    TEST_ACC_KEY_ID:
+      from_secret: TEST_ACC_KEY_ID
+    TEST_ACC_SECRET_KEY:
+      from_secret: TEST_ACC_SECRET_KEY
+  when:
+    event:
+    - push
+
+- name: validate
+  pull: if-not-exists
+  image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+  commands:
+  - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+  - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+  - export CI_ID=$${TF_VAR_CI_ID}
+  - export CI_KEY=$${TF_VAR_CI_KEY}
+  - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+  - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
+  - terragrunt validate
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    SSH_KEY:
+      from_secret: SSH_KEY
+    TEST_ACC_KEY_ID:
+      from_secret: TEST_ACC_KEY_ID
+    TEST_ACC_SECRET_KEY:
+      from_secret: TEST_ACC_SECRET_KEY
+    TF_VAR_CI_ID:
+      from_secret: TF_VAR_CI_ID
+    TF_VAR_CI_KEY:
+      from_secret: TF_VAR_CI_KEY
+  when:
+    event:
+    - push
+
+- name: plan-test
+  pull: always
+  image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+  commands:
+  - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+  - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+  - export CI_ID=$${TF_VAR_CI_ID}
+  - export CI_KEY=$${TF_VAR_CI_KEY}
+  - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
+  - ssh-keyscan -t rsa -p 2222 gitlab.digital.homeoffice.gov.uk >>  ~/.ssh/known_hosts
+  - terragrunt plan -out=plan
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    SSH_KEY:
+      from_secret: SSH_KEY
+    TEST_ACC_KEY_ID:
+      from_secret: TEST_ACC_KEY_ID
+    TEST_ACC_SECRET_KEY:
+      from_secret: TEST_ACC_SECRET_KEY
+    TF_VAR_CI_ID:
+      from_secret: TF_VAR_CI_ID
+    TF_VAR_CI_KEY:
+      from_secret: TF_VAR_CI_KEY
+  when:
+    event:
+    - push
+
+- name: apply-test
+  pull: always
+  image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+  commands:
+  - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
+  - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
+  - export CI_ID=$${TF_VAR_CI_ID}
+  - export CI_KEY=$${TF_VAR_CI_KEY}
+  - terragrunt apply -lock=false -auto-approve -parallelism=50 plan
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    TEST_ACC_ID:
+      from_secret: TEST_ACC_ID
+    TEST_ACC_KEY:
+      from_secret: TEST_ACC_KEY
+    TF_VAR_CI_ID:
+      from_secret: TF_VAR_CI_ID
+    TF_VAR_CI_KEY:
+      from_secret: TF_VAR_CI_KEY
+  when:
+    branch:
+    - master
+    event:
+    - push
+
+services:
+  - name: docker
+    image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
