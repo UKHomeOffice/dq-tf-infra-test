@@ -2,25 +2,18 @@ resource "aws_iam_policy" "test_policy_name_alpha" {
   count = 5
   name  = "test-policy-name-alpha"
 
-  policy = <<EOF
-  {
-    "Version": "2012-10-17",
-    "Statement": [
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
       {
-        "Effect": "Allow",
-        "Action": [
-          "logs:CreateLogStream",
-          "logs:CreateLogGroup",
-          "logs:PutLogEvents"
-        ],
-        "Resource": [
-          "*",
+        Action = [
+          "ec2:Describe*",
         ]
-      }
+        Effect   = "Allow"
+        Resource = "*"
+      },
     ]
-  }
-EOF
-
+  })
 }
 
 
