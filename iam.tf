@@ -3,35 +3,22 @@ resource "aws_iam_policy" "test_policy_name_alpha" {
   name  = "test-policy-name-alpha"
 
   policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "glue:GetDatabase",
-      ],
-      "Effect": "Allow",
-      "Resource": [
-          "*"
-      ]
-    },
-    {
-      "Action": [
-        "ssm:GetParameter"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ssm:eu-west-2:*:parameter/AD_AdminPasswordd"
-    },
-    {
-      "Action": [
-        "states:List*",
-        "states:Describe*"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "logs:CreateLogStream",
+          "logs:CreateLogGroup",
+          "logs:PutLogEvents"
+        ],
+        "Resource": [
+          "*",
+        ]
+      }
+    ]
+  }
 EOF
 
 }
