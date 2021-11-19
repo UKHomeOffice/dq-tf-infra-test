@@ -1,3 +1,42 @@
+resource "aws_iam_policy" "test_policy_name_alpha" {
+  count = 5
+  name  = "test-policy-name-alpha"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "glue:GetDatabase",
+      ],
+      "Effect": "Allow",
+      "Resource": [
+          "*"
+      ]
+    },
+    {
+      "Action": [
+        "ssm:GetParameter"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ssm:eu-west-2:*:parameter/AD_AdminPasswordd"
+    },
+    {
+      "Action": [
+        "states:List*",
+        "states:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+
+}
+
+
 # resource "aws_iam_role_policy" "write_to_cw" {
 #   role     = element(concat(module.ops.iam_roles, module.peering.iam_roles), count.index)
 #   count    = 20
