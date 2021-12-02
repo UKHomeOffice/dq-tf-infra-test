@@ -142,6 +142,6 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "test_role" {
-  role       = aws_iam_role.write_to_cw.id
+  role       = aws_iam_role.test_role.id
   policy_arn = aws_iam_policy.write_to_cw.id
 }
