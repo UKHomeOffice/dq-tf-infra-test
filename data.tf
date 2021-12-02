@@ -59,33 +59,3 @@ data "aws_kms_secrets" "ad_admin_password" {
     }
   }
 }
-
-data "aws_iam_policy" "write_to_cw" {
-  arn = aws_iam_policy.write_to_cw.arn
-}
-
-resource "aws_iam_role" "test_role" {
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": [
-                    "ec2.amazonaws.com",
-                    "s3.amazonaws.com"
-        ]
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-EOF
-
-}
-
-resource "aws_iam_role_policy_attachment" "test_role" {
-  role       = data.aws_iam_policy.write_to_cw.arn
-  policy_arn = aws_iam_policy.write_to_cw.id
-}
