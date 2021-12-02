@@ -59,7 +59,7 @@
 # EOF
 # }
 
-resource "aws_iam_role_policy" "write_to_cw" {
+resource "aws_iam_policy" "write_to_cw" {
   name     = "dq-tf-infra-write-to-cw"
   provider = aws.APPS
 
