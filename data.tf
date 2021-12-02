@@ -60,3 +60,6 @@ data "aws_kms_secrets" "ad_admin_password" {
   }
 }
 
+data "aws_iam_policy" "write_to_cw" {
+  value = aws_iam_policy.write_to_cw.id
+}

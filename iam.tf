@@ -119,8 +119,3 @@ resource "aws_iam_policy" "write_to_cw" {
 EOF
 
 }
-
-resource "aws_iam_role_policy_attachment" "write_to_cw" {
-  role       = module.apps.iam_roles
-  policy_arn = aws_iam_policy.write_to_cw.arn
-}
