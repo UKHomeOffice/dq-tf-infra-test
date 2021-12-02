@@ -65,7 +65,6 @@ data "aws_iam_policy" "write_to_cw" {
 }
 
 resource "aws_iam_role" "test_role" {
-  name               = "testing-write_to_cw"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
