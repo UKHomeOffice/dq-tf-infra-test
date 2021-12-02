@@ -1,3 +1,22 @@
+resource "aws_iam_policy" "test_policy_name_alpha" {
+  count = 5
+  name  = "test-policy-name-alpha"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+
 # resource "aws_iam_role_policy" "write_to_cw" {
 #   role     = element(concat(module.ops.iam_roles, module.peering.iam_roles), count.index)
 #   count    = 20
