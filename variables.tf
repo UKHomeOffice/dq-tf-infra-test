@@ -17,3 +17,6 @@ variable "NAMESPACE" {
 
 variable "account_id" {
 }
+
+variable "environment" {
+}
