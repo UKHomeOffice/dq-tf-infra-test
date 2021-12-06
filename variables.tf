@@ -15,3 +15,5 @@ variable "NAMESPACE" {
   default = "test"
 }
 
+variable "account_id" {
+}
