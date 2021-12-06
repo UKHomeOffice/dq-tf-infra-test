@@ -16,7 +16,10 @@ variable "NAMESPACE" {
 }
 
 variable "account_id" {
-}
-
-variable "environment" {
+  type = map(string)
+  default = {
+    "test"    = "797728447925"
+    "notprod" = "483846886818"
+    "prod"    = "337779336338"
+  }
 }
