@@ -79,6 +79,7 @@ module "apps" {
     aftc_sc_msk                = "s3-dq-aftc-sc-msk-${var.NAMESPACE}"
     dq_ais_archive             = "s3-dq-ais-archive-${var.NAMESPACE}"
     dq_pnr_archive             = "s3-dq-pnr-archive-${var.NAMESPACE}"
+    dq_pnr_internal            = "s3-dq-pnr-internal-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -137,6 +138,7 @@ module "apps" {
     aftc_sc_msk                = "private"
     dq_ais_archive             = "private"
     dq_pnr_archive             = "private"
+    dq_pnr_internal            = "private"
   }
 
   vpc_peering_connection_ids = {
