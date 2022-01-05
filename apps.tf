@@ -78,6 +78,7 @@ module "apps" {
     dq_asn_marine_internal     = "s3-dq-asn-marine-internal-${var.NAMESPACE}"
     aftc_sc_msk                = "s3-dq-aftc-sc-msk-${var.NAMESPACE}"
     dq_ais_archive             = "s3-dq-ais-archive-${var.NAMESPACE}"
+    dq_ais_internal            = "s3-dq-ais-internal-${var.NAMESPACE}"
     dq_pnr_archive             = "s3-dq-pnr-archive-${var.NAMESPACE}"
     dq_pnr_internal            = "s3-dq-pnr-internal-${var.NAMESPACE}"
   }
@@ -137,6 +138,7 @@ module "apps" {
     dq_asn_marine_internal     = "private"
     aftc_sc_msk                = "private"
     dq_ais_archive             = "private"
+    dq_ais_internal            = "private"
     dq_pnr_archive             = "private"
     dq_pnr_internal            = "private"
   }
