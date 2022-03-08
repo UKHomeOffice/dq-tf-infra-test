@@ -24,6 +24,11 @@ variable "account_id" {
   }
 }
 
+variable "dq_pub_ips" {
+  type    = list(string)
+  default = []
+}
+
 variable "dq_ips_notprod" {
   type = list(string)
   default = [
