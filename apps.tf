@@ -1,5 +1,5 @@
 module "apps" {
-  source = "github.com/ukhomeoffice/dq-tf-apps-test"
+  source = "github.com/UKHomeOffice/dq-tf-apps-test"
 
   providers = {
     aws = aws.APPS
@@ -22,7 +22,6 @@ module "apps" {
   haproxy_config_bucket           = module.peering.haproxy_config_bucket
   haproxy_config_bucket_key       = module.peering.haproxy_config_bucket_key
   account_id                      = var.account_id
-  dq_pub_ips                      = var.NAMESPACE == "prod" ? var.dq_ips_prod : var.dq_ips_notprod
 
   s3_bucket_name = {
     archive_log                = "s3-dq-log-archive-bucket-${var.NAMESPACE}"
@@ -47,7 +46,6 @@ module "apps" {
     gait_internal              = "s3-dq-gait-internal-${var.NAMESPACE}"
     cross_record_scored        = "s3-dq-cross-record-scored-${var.NAMESPACE}"
     reporting_internal_working = "s3-dq-reporting-internal-working-${var.NAMESPACE}"
-    carrier_portal_working     = "s3-dq-carrier-portal-working-${var.NAMESPACE}"
     mds_extract                = "s3-dq-mds-extract-${var.NAMESPACE}"
     raw_file_index_internal    = "s3-dq-raw-file-index-internal-${var.NAMESPACE}"
     fms_working                = "s3-dq-fms-working-${var.NAMESPACE}"
@@ -63,13 +61,10 @@ module "apps" {
     api_arrivals               = "s3-dq-api-arrivals-${var.NAMESPACE}"
     accuracy_score             = "s3-dq-accuracy-score-${var.NAMESPACE}"
     api_cdlz_msk               = "s3-dq-api-cdlz-msk-${var.NAMESPACE}"
-    cdl_s3_s4                  = "s3-dq-cdl-s3-s4-${var.NAMESPACE}"
-    cdl_s3_s4_parsed           = "s3-dq-cdl-s3-s4-parsed-${var.NAMESPACE}"
-    api-rls-xrs-reconciliation = "s3-dq-rls-xrs-reconciliation-${var.NAMESPACE}"
+    drt_export                 = "s3-dq-drt-extra-${var.NAMESPACE}"
+    api_rls_xrs_reconciliation = "s3-dq-rls-xrs-reconciliation-${var.NAMESPACE}"
     dq_fs_archive              = "s3-dq-fs-archive-${var.NAMESPACE}"
     dq_fs_internal             = "s3-dq-fs-internal-${var.NAMESPACE}"
-    dq_rm_archive              = "s3-dq-rm-archive-${var.NAMESPACE}"
-    dq_rm_internal             = "s3-dq-rm-internal-${var.NAMESPACE}"
     dq_aws_config              = "s3-dq-aws-config-${var.NAMESPACE}"
     dq_asn_archive             = "s3-dq-asn-archive-${var.NAMESPACE}"
     dq_asn_internal            = "s3-dq-asn-internal-${var.NAMESPACE}"
@@ -77,11 +72,15 @@ module "apps" {
     dq_snsgb_internal          = "s3-dq-snsgb-internal-${var.NAMESPACE}"
     dq_asn_marine_archive      = "s3-dq-asn-marine-archive-${var.NAMESPACE}"
     dq_asn_marine_internal     = "s3-dq-asn-marine-internal-${var.NAMESPACE}"
-    aftc_sc_msk                = "s3-dq-aftc-sc-msk-${var.NAMESPACE}"
+    dq_rm_archive              = "s3-dq-rm-archive-${var.NAMESPACE}"
+    dq_rm_internal             = "s3-dq-rm-internal-${var.NAMESPACE}"
+    dq_data_generator          = "s3-dq-data-generator-${var.NAMESPACE}"
     dq_ais_archive             = "s3-dq-ais-archive-${var.NAMESPACE}"
     dq_ais_internal            = "s3-dq-ais-internal-${var.NAMESPACE}"
+    dq_gait_landing_staging    = "s3-dq-gait-landing-staging"
     dq_pnr_archive             = "s3-dq-pnr-archive-${var.NAMESPACE}"
     dq_pnr_internal            = "s3-dq-pnr-internal-${var.NAMESPACE}"
+    carrier_portal_docs        = "s3-dq-carrier-portal-docs-${var.NAMESPACE}"
   }
 
   s3_bucket_acl = {
@@ -107,7 +106,6 @@ module "apps" {
     gait_internal              = "private"
     cross_record_scored        = "private"
     reporting_internal_working = "private"
-    carrier_portal_working     = "private"
     mds_extract                = "private"
     raw_file_index_internal    = "private"
     fms_working                = "private"
@@ -123,13 +121,10 @@ module "apps" {
     api_arrivals               = "private"
     accuracy_score             = "private"
     api_cdlz_msk               = "private"
-    cdl_s3_s4                  = "private"
-    cdl_s3_s4_parsed           = "private"
-    api-rls-xrs-reconciliation = "private"
+    drt_export                 = "private"
+    api_rls_xrs_reconciliation = "private"
     dq_fs_archive              = "private"
     dq_fs_internal             = "private"
-    dq_rm_archive              = "private"
-    dq_rm_internal             = "private"
     dq_aws_config              = "private"
     dq_asn_archive             = "private"
     dq_asn_internal            = "private"
@@ -137,11 +132,16 @@ module "apps" {
     dq_snsgb_internal          = "private"
     dq_asn_marine_archive      = "private"
     dq_asn_marine_internal     = "private"
-    aftc_sc_msk                = "private"
+    dq_rm_archive              = "private"
+    dq_rm_internal             = "private"
+    dq_data_generator          = "private"
     dq_ais_archive             = "private"
     dq_ais_internal            = "private"
+    dq_gait_landing_staging    = "private"
     dq_pnr_archive             = "private"
     dq_pnr_internal            = "private"
+    carrier_portal_docs        = "private"
+
   }
 
   vpc_peering_connection_ids = {

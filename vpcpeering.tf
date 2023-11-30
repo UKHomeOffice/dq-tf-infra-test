@@ -61,4 +61,3 @@ resource "aws_vpc_peering_connection" "apps_to_ops" {
     Name = "apps-to-ops-${local.vpc_peering_naming_suffix}"
   }
 }
-
