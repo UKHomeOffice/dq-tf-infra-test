@@ -124,6 +124,11 @@ resource "aws_iam_policy" "write_to_cw_new" {
       "Resource": [
           "*"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ec2:ModifyInstanceMetadataOptions",
+      "Resource": "arn:aws:ec2:*:*:instance/*"
     }
   ]
 }
