@@ -1,7 +1,17 @@
+# Remove Inline Policy
+
 # resource "aws_iam_role_policy" "write_to_cw" {
-#   role     = element(concat(module.ops.iam_roles, module.peering.iam_roles), count.index)
-#   count    = 20
-#   provider = "aws.APPS"
+#   name     = "dq-tf-infra-write-to-cw-count-${count.index}"
+#   provider = aws.APPS
+#   role = element(
+#     concat(
+#       module.apps.iam_roles,
+#       module.ops.iam_roles,
+#       module.peering.iam_roles,
+#     ),
+#     count.index,
+#   )
+#   count = 20
 #
 #   policy = <<EOF
 # {
@@ -57,9 +67,10 @@
 #   ]
 # }
 # EOF
+#
 # }
 
-resource "aws_iam_policy" "write_to_cw" {
+resource "aws_iam_policy" "write_to_cw_new" {
   name     = "dq-tf-infra-write-to-cw"
   provider = aws.APPS
 
