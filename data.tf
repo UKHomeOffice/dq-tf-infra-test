@@ -49,24 +49,24 @@ locals {
 }
 
 
-data "aws_kms_secrets" "ad_joiner_password" {
-  secret {
-    name    = "ad_joiner_password"
-    payload = local.AdminPassword
+# data "aws_kms_secrets" "ad_joiner_password" {
+#   secret {
+#     name    = "ad_joiner_password"
+#     payload = local.AdminPassword
+#
+#     context = {
+#       terraform = "active_directory"
+#     }
+#   }
+# }
 
-    context = {
-      terraform = "active_directory"
-    }
-  }
-}
-
-data "aws_kms_secrets" "ad_admin_password" {
-  secret {
-    name    = "ad_admin_password"
-    payload = local.AdminPassword
-
-    context = {
-      terraform = "active_directory"
-    }
-  }
-}
+# data "aws_kms_secrets" "ad_admin_password" {
+#   secret {
+#     name    = "ad_admin_password"
+#     payload = local.AdminPassword
+#
+#     context = {
+#       terraform = "active_directory"
+#     }
+#   }
+# }
