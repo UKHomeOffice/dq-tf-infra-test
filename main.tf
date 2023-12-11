@@ -3,10 +3,10 @@ terraform {
   }
 }
 
-locals {
-  naming_suffix  = "${var.NAMESPACE}-dq"
-  iam_role_count = length(module.apps.iam_roles)
-}
+#locals {
+#  naming_suffix  = "${var.NAMESPACE}-dq"
+#  iam_role_count = length(module.apps.iam_roles)
+#}
 
 provider "aws" {
   region = "eu-west-2"
