@@ -1,7 +1,7 @@
 pipeline:
 
   init:
-    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.48.0
     pull: true
     commands:
       - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
@@ -41,7 +41,7 @@ pipeline:
       - SSH_KEY
 
   validate:
-    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.48.0
     commands:
       - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
       - export TF_VAR_APPS_KEY=$${TEST_ACC_SECRET_KEY}
@@ -64,7 +64,7 @@ pipeline:
       - SSH_KEY
 
   plan-test:
-    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.48.0
     pull: true
     commands:
       - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
@@ -86,7 +86,7 @@ pipeline:
       - SSH_KEY
 
   apply-test:
-    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.23.18
+    image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.48.0
     pull: true
     commands:
       - export TF_VAR_APPS_ID=$${TEST_ACC_KEY_ID}
