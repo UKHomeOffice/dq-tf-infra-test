@@ -11,4 +11,4 @@ terraform {
       source = "hashicorp/random"
     }
   }
-}}
+}
