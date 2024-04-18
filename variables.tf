@@ -27,5 +27,6 @@ variable "account_id" {
   }
 }
 
-#variable "AdminPassword" {
-#}
+variable "AdminPassword" {
+  default = ""
+}
