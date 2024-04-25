@@ -1,6 +1,6 @@
 pipeline:
 
-  init: 
+  init:
     image: quay.io/ukhomeofficedigital/dq-docker-terragrunt:v0.48.5
     pull: true
     commands:
