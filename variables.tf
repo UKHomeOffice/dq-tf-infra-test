@@ -15,9 +15,9 @@ variable "NAMESPACE" {
   default = "test"
 }
 
-#variable "DOMAIN_JOINER_PWD" {
-#  default = "" 
-#}
+variable "DOMAIN_JOINER_PWD" {
+  default = "" 
+}
 
 variable "account_id" {
   type = map(string)
