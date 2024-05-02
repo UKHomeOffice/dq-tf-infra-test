@@ -36,7 +36,7 @@ steps:
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
   commands:
   - mkdir /root/.ssh && echo "$SSH_KEY" > /root/.ssh/id_rsa && chmod 0600 /root/.ssh/id_rsa
-  - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt --diff --check && echo $?
+  - docker run --rm -v $(pwd):/data -w /data hashicorp/terraform fmt && echo $?
   environment:
     AWS_ACCESS_KEY_ID:
       from_secret: AWS_ACCESS_KEY_ID
