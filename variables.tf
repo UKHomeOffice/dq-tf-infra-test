@@ -16,7 +16,7 @@ variable "NAMESPACE" {
 }
 
 variable "DOMAIN_JOINER_PWD" {
-  default = "" 
+  default = ""
 }
 
 variable "account_id" {
